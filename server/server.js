@@ -60,6 +60,14 @@ const jobPostingData = [
     requirement: ['B.S. degree in computer science', 'Experience with Java'],
     deadline: '2023-12-25',
   },
+  {
+    jobId: '' + jobIdCounter++,
+    recruiterId: '12345',
+    title: 'Web Developer',
+    description: 'Exciting...',
+    requirement: ['B.S. degree in computer science', 'Experience with JavaScript'],
+    deadline: '2023-12-25',
+  }
 ];
 
 // The root provides a resolver function for each API endpoint
