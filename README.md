@@ -1,7 +1,7 @@
 # This is a project for COE558 @ KFUPM
 # Main contributors
-Haithem Albetairi
-Nasser Aldossary
+-Haithem Albetairi
+-Nasser Aldossary
 
 # Introduction
 We're creating a job applications  platform designed to facilitate the process of job seekers applying for positions and employers managing job listings and applicant information.
