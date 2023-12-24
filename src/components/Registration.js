@@ -1,11 +1,12 @@
-// src/components/Registration.js
+// Registration.js
 import React, { useState } from 'react';
+import './Registration.css'; // Import the CSS file
 
 const Registration = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    confirmPassword: '',
+    userType: 'job_hunter',
   });
 
   const handleChange = (e) => {
@@ -18,9 +19,8 @@ const Registration = ({ onLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your registration logic here, e.g., send the data to a registration API
     console.log('Registration data submitted:', formData);
-    onLogin(); // Assume successful registration transitions to login
+    onLogin();
   };
 
   return (
@@ -50,15 +50,31 @@ const Registration = ({ onLogin }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
+          <label>User Type:</label>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="userType"
+                value="job_hunter"
+                checked={formData.userType === 'job_hunter'}
+                onChange={handleChange}
+              />
+              Job Hunter
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="userType"
+                value="recruiter"
+                checked={formData.userType === 'recruiter'}
+                onChange={handleChange}
+              />
+              Recruiter
+            </label>
+          </div>
         </div>
         <button type="submit">Register</button>
       </form>

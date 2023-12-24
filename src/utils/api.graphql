@@ -19,7 +19,7 @@ type JobApplication {
 
 type UserAccount {
   userId: ID!
-  username: String!
+  email: String!
   password: String!
   userType: String!
   userProfile: UserProfile
@@ -29,8 +29,8 @@ type UserAccount {
 type UserProfile {
   userId: ID!
   fullName: String!
-  email: String!
   skills: [String!]
+  resume: String
 }
 
 type Query {
@@ -59,20 +59,20 @@ input JobPostingInput {
 input JobApplicationInput {
   jobId: ID!
   userId: ID!
-  resume: String!
+  resume: String
   coverLetter: String
 }
 
 input UserAccountInput {
-  username: String!
+  email: String!
   password: String!
   userType: String!
 }
 
 input UserProfileInput {
   fullName: String!
-  email: String!
   skills: [String!]
+  resume: String
 }
 
 query JobPostings {
@@ -90,12 +90,13 @@ query JobApplications {
   jobApplications(jobId: "67890") {
     applicationId
     userId
+    email
     resume
     coverLetter
     userProfile {
       fullName
-      email
       skills
+      resume
     }
   }
 }
@@ -114,8 +115,8 @@ query JobsApplied {
 query UserProfile {
   userProfile(userId: "98765") {
     fullName
-    email
     skills
+    resume
   }
 }
 
@@ -145,7 +146,7 @@ mutation ApplyForJob {
 
 mutation CreateUserAccount {
   createUserAccount(input: {
-    username: "john_doe",
+    email: "john.doe@example.com",
     password: "hased_password",
     userType: "job_hunter"
   }) {
@@ -156,7 +157,6 @@ mutation CreateUserAccount {
 mutation UpdateUserProfile {
   updateUserProfile(input: {
     fullName: "John Doe",
-    email: "john.doe@example.com",
     skills: ["Java", "Python", "Web Development"]
   }) {
     userId
