@@ -1,0 +1,85 @@
+/* Reset some default styles */
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  background-color: #fff; /* White background */
+  color: #333; /* Dark grey text color */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #008080; /* Teal header background color */
+  color: #fff; /* White text color */
+  padding: 10px;
+}
+
+.navbar {
+  background-color: #f0f0f0; /* Light grey navbar background color */
+  padding: 10px;
+}
+
+.navbar a {
+  color: #333; /* Dark grey navbar link color */
+  text-decoration: none;
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+.job-listing {
+  border: 1px solid #ddd; /* Light grey border for job listings */
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.job-listing h2 {
+  color: #008080; /* Teal heading color */
+}
+
+.job-listing p {
+  color: #666; /* Medium grey text color */
+}
+
+.apply-button {
+  background-color: #008080; /* Teal apply button background color */
+  color: #fff; /* White text color for apply button */
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.apply-button:hover {
+  background-color: #005757; /* Darker teal on hover */
+}
+
+.footer {
+  background-color: #f0f0f0; /* Light grey footer background color */
+  padding: 10px;
+  text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .navbar {
+    text-align: center;
+  }
+
+  .navbar a {
+    display: block;
+    margin: 5px 0;
+  }
+}

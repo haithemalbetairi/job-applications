@@ -1,0 +1,108 @@
+{
+    "endpoints": [
+        {
+            "name": "POST   /job-posting",
+            "request":
+            {
+                "data": {
+                    "title": "Software Engineer",
+                    "description": "Exciting opportunity for...",
+                    "requirements": [
+                        "B.S. degree in computer science",
+                        "Experience with Java"
+                    ],
+                    "deadline": "2023-12-31",
+                    "recruiter_id": "12345"
+                }
+            },
+            "response":
+            {
+                "message": "Job posting created successfully.",
+                "data": {
+                    "job_id": "67890"
+                }
+            }
+        },
+        {
+            "name": "GET    /job-listings",
+            "response":
+            {
+                "data": [
+                    {
+                        "title": "Software Engineer",
+                        "description": "Exciting…", 
+                        "requirements": [
+                            "B.S. degree in computer science",
+                            "Experience with Java"
+                        ],
+                        "deadline": "2023-12-25",
+                        "recruiter_id": "12345"
+
+                    },
+                    {
+                        "_comment": "Additional job listings"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "POST   /job-applications",
+            "request":
+            {
+                "data": {
+                    "job_id": "67890",
+                    "user_id": "98765",
+                    "resume": "base64_encoded_resume_content",
+                    "cover_letter": "A brief cover letter expressing..."
+                }
+            },
+            "response":
+            {
+                "message": "Job application submitted successfully.",
+                "data": {
+                    "application_id": "54321"
+                }
+            }
+        },
+        {
+            "name": "POST   /user-accounts",
+            "request":
+            {
+                "data": {
+                    "username": "john_doe",
+                    "password": "hashed_password",
+                    "user_type": "job_hunter"
+                }
+            },
+            "response":
+            {
+                "message": "User account created successfully.",
+                "data": {
+                    "user_id": "98765"
+                }
+            }
+        },
+        {
+            "name": "PUT   /user-accounts/{user_id}",
+            "request":
+            {
+                "data": {
+                    "full_name": "John Doe",
+                    "email": "john.doe@example.com",
+                    "skills": [
+                        "Python",
+                        "Java",
+                        "Web Development"
+                    ]
+                }
+            },
+            "response":
+            {
+                "message": "User profile updated successfully.",
+                "data": {
+                    "user_id": "98765"
+                }
+            }
+        }
+    ]
+}

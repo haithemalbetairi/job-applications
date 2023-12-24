@@ -1,0 +1,164 @@
+type JobPosting {
+  jobId: ID!
+  recruiterId: ID!
+  title: String!
+  description: String!
+  requirements: [String!]!
+  deadline: String!
+  applications: [JobApplication!]
+}
+
+type JobApplication {
+  applicationId: ID!
+  jobId: ID!
+  userId: ID!
+  resume: String!
+  coverLetter: String
+  userProfile: UserProfile
+}
+
+type UserAccount {
+  userId: ID!
+  username: String!
+  password: String!
+  userType: String!
+  userProfile: UserProfile
+  jobsApplied: [JobPosting!]
+}
+
+type UserProfile {
+  userId: ID!
+  fullName: String!
+  email: String!
+  skills: [String!]
+}
+
+type Query {
+  jobPostings: [JobPosting]
+  jobApplications(jobId: ID): [JobApplication!]
+  jobsApplied(userId: ID): [JobPosting!]
+  userProfile(userId: ID): UserProfile
+}
+
+type Mutation {
+  createJobPosting(input: JobPostingInput!): ID!
+  applyForJob(input: JobApplicationInput!): ID!
+  createUserAccount(input: UserAccountInput!): ID!
+  updateUserProfile(userId: ID!, input: UserProfileInput!): ID!
+}
+
+input JobPostingInput {
+  jobId: ID!
+  title: String!
+  description: String!
+  requirements: [String!]!
+  deadline: String!
+  recruiterId: ID!
+}
+
+input JobApplicationInput {
+  jobId: ID!
+  userId: ID!
+  resume: String!
+  coverLetter: String
+}
+
+input UserAccountInput {
+  username: String!
+  password: String!
+  userType: String!
+}
+
+input UserProfileInput {
+  fullName: String!
+  email: String!
+  skills: [String!]
+}
+
+query JobPostings {
+  jobPostings {
+    jobId
+    recruiterId
+    title
+    description
+    requirements
+    deadline
+  }
+}
+
+query JobApplications {
+  jobApplications(jobId: "67890") {
+    applicationId
+    userId
+    resume
+    coverLetter
+    userProfile {
+      fullName
+      email
+      skills
+    }
+  }
+}
+
+query JobsApplied {
+  jobsApplied(userId:"98765") {
+    jobId
+    recruiterId
+    title
+    description
+    requirements
+    deadline
+  }
+}
+
+query UserProfile {
+  userProfile(userId: "98765") {
+    fullName
+    email
+    skills
+  }
+}
+
+mutation CreateJobPosting {
+  createJobPosting(input: {
+    jobId: "67890",
+    title: "Software Engineer",
+    description: "Exciting opportunity for a skilled software engineer...",
+    requirements: ["B.S. degree in Computer Science", "Experience with Java"],
+    deadline: "2023-12-31",
+    recruiterId: "12345"
+  }) {
+    jobId
+  }
+}
+
+mutation ApplyForJob {
+  applyForJob(input: {
+    jobId: "67890",
+    userId: "98765",
+    resume: "base64_encoded_resume_content",
+    coverLetter: "A brief covver letter for..."
+  }) {
+    applicationId
+  }
+}
+
+mutation CreateUserAccount {
+  createUserAccount(input: {
+    username: "john_doe",
+    password: "hased_password",
+    userType: "job_hunter"
+  }) {
+    userId
+  }
+}
+
+mutation UpdateUserProfile {
+  updateUserProfile(input: {
+    fullName: "John Doe",
+    email: "john.doe@example.com",
+    skills: ["Java", "Python", "Web Development"]
+  }) {
+    userId
+  }
+}
