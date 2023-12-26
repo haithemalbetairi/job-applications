@@ -28,7 +28,7 @@ exports.createUser = functions.https.onRequest(async (req, res) => {
   }
 
   try {
-    const { email, password } = req.body;
+    const { email, password, userType } = req.body;
 
     // Create a new user with the provided email and password
     const userRecord = await admin.auth().createUser({
@@ -41,6 +41,7 @@ exports.createUser = functions.https.onRequest(async (req, res) => {
     const applicationRef = await db.collection('users').doc({email}).set({
       name: "",
       skills: []
+      userType: userType
     });
     
 

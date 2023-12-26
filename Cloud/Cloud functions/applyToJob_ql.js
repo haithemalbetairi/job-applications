@@ -39,8 +39,8 @@ const root = {
   message: () => 'Hello World!',
   submitJobApplication: async ({ job, email }) => {
     try {
-      const applicationRef = await admin.firestore().collection('job-application').add({
-        job: admin.firestore().collection('job-listings').doc({job}),
+      const applicationRef = await admin.firestore().collection('Applications').add({
+        job: admin.firestore().collection('Jobs').doc({job}),
         user: admin.firestore().collection('user').doc({email}),
       });
 

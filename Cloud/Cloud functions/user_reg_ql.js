@@ -22,7 +22,7 @@ admin.initializeApp({
 
 const schema = buildSchema(`
   type Mutation {
-    createUser(email: String!, password: String!): User
+    createUser(email: String!, password: String!, userType: String!): User
   }
   type User {
     userId: String
@@ -32,7 +32,7 @@ const schema = buildSchema(`
 `);
 
 const root = {
-  createUser: async ({ email, password }) => {
+  createUser: async ({ email, password, userType}) => {
     try {
       const userRecord = await admin.auth().createUser({
         email,
@@ -42,6 +42,7 @@ const root = {
 
       await admin.firestore().collection('users').doc(email).set({
         name: "",
+        userType: userType,
         skills: []
       });
 
