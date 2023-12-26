@@ -1,14 +1,21 @@
 // src/components/Navbar.js
-import React from 'react';
+import React, { useState } from 'react';
+import JobForm from './JobForm';
 
 const Navbar = () => {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleToggleClick = () => {
+    setIsClicked(!isClicked);
+  };
   return (
     <div className="navbar">
-      <div className="container">
-        <a href="#">Home</a>
-        <a href="#">Jobs</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+      <div className="job-form">
+        <button type="button">Home</button>
+        <button type="button" onClick={handleToggleClick}>
+          Job posting
+        </button>
+        {isClicked ? <JobForm state={handleToggleClick} /> : null}
       </div>
     </div>
   );

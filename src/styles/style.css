@@ -118,3 +118,36 @@ button {
   border-radius: 5px;
 }
 
+.job-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.job-form input[type='text'] {
+  height: 20px; /* Custom height */
+  width: 100px; /* Custom width */
+  /* Additional styles like padding, border, etc., to achieve the desired appearance */
+}
+.job-form button {
+  background-color: #fff;
+  color: #333;
+  margin: 3px;
+}
+.job-form input {
+  background-color: #fff;
+  color: #333;
+  display: inline;
+  margin: 3px;
+}
+.job-form textarea {
+  background-color: #fff;
+  color: #333;
+  display: inline;
+  height: 20px; /* Custom height */
+  width: 150px;
+}
+.job-form button:hover {
+  background-color: #666;
+  color: #ddd;
+}
