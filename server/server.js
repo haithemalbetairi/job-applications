@@ -5,48 +5,65 @@ const path = require('path');
 
 // Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
-  type Query {
-    jobPostings: [JobPosting]
-    jobApplications(jobId: ID): [JobApplication!]
-    jobsApplied(userId: ID): [JobPosting!]
-    userProfile(userId: ID): UserProfile
+  type Job {
+    id: ID
+    data: JobData
   }
 
-  type JobPosting {
-    jobId: ID!
-    recruiterId: ID!
-    title: String!
-    description: String!
-    requirements: [String!]!
-    deadline: String!
-    applications: [JobApplication!]
+  type JobData {
+    title: String
+    description: String
+    deadline: String
+    recruiterEmail: String
+    requirements: [String]
+    applications: [Application]
   }
-  
-  type JobApplication {
-    applicationId: ID!
-    jobId: ID!
-    userId: ID!
-    resume: String!
+
+  type Application {
+    job: Job
+    user: User
+    resume: String
     coverLetter: String
-    userProfile: UserProfile
-  }
-  
-  type UserAccount {
-    userId: ID!
-    username: String!
-    password: String!
-    userType: String!
-    userProfile: UserProfile
-    jobsApplied: [JobPosting!]
-  }
-  
-  type UserProfile {
-    userId: ID!
-    fullName: String!
-    email: String!
-    skills: [String!]
   }
 
+  type User {
+    email: String
+    data: UserData
+  }
+
+  type UserData {
+    name: String
+    jobsApplied: [Application]
+    skills: [String]
+    userType: String
+  }
+
+  type Query {
+    jobPostings: [Job]
+    jobApplications(jobId: ID): JobData
+    jobsApplied(email: String): User
+  }
+
+  type Mutation {
+    createJob(job: Job): ID
+    addUser(user: User): String
+    applyForJob(input: ApplicationInput): Application
+  }
+
+  input JobInput {
+    title: String
+    description: String
+    deadline: String
+    recruiterEmail: String
+    requirements: [String]
+  }
+
+  input ApplicationInput {
+    job: ID
+    user: String
+    resume: String
+    coverLetter: String
+  }
 `);
 
 let jobIdCounter = 1;

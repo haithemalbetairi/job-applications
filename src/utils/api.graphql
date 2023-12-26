@@ -1,88 +1,72 @@
-type JobPosting {
-  jobId: ID!
-  recruiterId: ID!
-  title: String!
-  description: String!
-  requirements: [String!]!
-  deadline: String!
-  applications: [JobApplication!]
+type Job {
+  id: ID
+  data: JobData
 }
 
-type JobApplication {
-  applicationId: ID!
-  jobId: ID!
-  userId: ID!
-  resume: String!
-  coverLetter: String
-  userProfile: UserProfile
+type JobData {
+  title: String
+  description: String
+  deadline: String
+  recruiterEmail: String
+  requirements: [String]
+  applications: [Application]
 }
 
-type UserAccount {
-  userId: ID!
-  email: String!
-  password: String!
-  userType: String!
-  userProfile: UserProfile
-  jobsApplied: [JobPosting!]
-}
-
-type UserProfile {
-  userId: ID!
-  fullName: String!
-  skills: [String!]
+type Application {
+  job: Job
+  user: User
   resume: String
+  coverLetter: String
+}
+
+type User {
+  email: String
+  data: UserData
+}
+
+type UserData {
+  name: String
+  jobsApplied: [Application]
+  skills: [String]
+  userType: String
 }
 
 type Query {
-  jobPostings: [JobPosting]
-  jobApplications(jobId: ID): [JobApplication!]
-  jobsApplied(userId: ID): [JobPosting!]
-  userProfile(userId: ID): UserProfile
+  jobPostings: [Job]
+  jobApplications(jobId: ID): JobData
+  jobsApplied(email: String): User
 }
 
 type Mutation {
-  createJobPosting(input: JobPostingInput!): ID!
-  applyForJob(input: JobApplicationInput!): ID!
-  createUserAccount(input: UserAccountInput!): ID!
-  updateUserProfile(userId: ID!, input: UserProfileInput!): ID!
+  createJob(job: Job): ID
+  addUser(user: User): String
+  applyForJob(input: ApplicationInput): Application
 }
 
-input JobPostingInput {
-  jobId: ID!
-  title: String!
-  description: String!
-  requirements: [String!]!
-  deadline: String!
-  recruiterId: ID!
+input JobInput {
+  title: String
+  description: String
+  deadline: String
+  recruiterEmail: String
+  requirements: [String]
 }
 
-input JobApplicationInput {
-  jobId: ID!
-  userId: ID!
+input ApplicationInput {
+  job: ID
+  user: String
   resume: String
   coverLetter: String
 }
 
-input UserAccountInput {
-  email: String!
-  password: String!
-  userType: String!
-}
-
-input UserProfileInput {
-  fullName: String!
-  skills: [String!]
-  resume: String
-}
-
-query JobPostings {
-  jobPostings {
-    jobId
-    recruiterId
+query Jobs {
+  id
+  data {
     title
     description
-    requirements
     deadline
+    recruiterEmail
+    requirements
+    applications
   }
 }
 
@@ -122,7 +106,6 @@ query UserProfile {
 
 mutation CreateJobPosting {
   createJobPosting(input: {
-    jobId: "67890",
     title: "Software Engineer",
     description: "Exciting opportunity for a skilled software engineer...",
     requirements: ["B.S. degree in Computer Science", "Experience with Java"],
