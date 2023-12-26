@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className="job-form">
         <button type="button">Home</button>
         <button type="button" onClick={handleToggleClick}>
-          Job posting
+          Posting a Job
         </button>
         {isClicked ? <JobForm state={handleToggleClick} /> : null}
       </div>
