@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
 
+
 const JobPostingForm = ({ onJobPost }) => {
   const [jobTitle, setJobTitle] = useState('');
   const [jobDescription, setJobDescription] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //onJobPost({ title: jobTitle, description: jobDescription });
+    try {
+        const response = await fetch('YOUR_API_GATEWAY_ENDPOINT', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            title: jobTitle,
+            description: jobDescription,
+          }),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
     setJobTitle('');
     setJobDescription('');
-    //setIsClicked((prev) => !prev);
+} catch (error) {
+    console.error('Error posting job:', error);
+    alert('Failed to post job');
+  }
   };
 
   return (

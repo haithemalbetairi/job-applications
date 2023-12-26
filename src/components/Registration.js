@@ -1,6 +1,20 @@
 // Registration.js
 import React, { useState } from 'react';
 
+import firebase from 'firebase/app';
+import 'firebase/auth';
+const firebaseConfig = {
+  apiKey: "AIzaSyA0nP2NYmqe-3ZCurR74QL_JgWklFPOIVw",
+  authDomain: "job-posting-409011.firebaseapp.com",
+  projectId: "job-posting-409011",
+  storageBucket: "job-posting-409011.appspot.com",
+  messagingSenderId: "848172609833",
+  appId: "1:848172609833:web:d50da1a1cd7e97346c8738",
+  measurementId: "G-G7YJ0X7PRN"
+};
+
+firebase.initializeApp(firebaseConfig);
+
 const Registration = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: '',
@@ -18,6 +32,15 @@ const Registration = ({ onLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const register = async (email, password) => {
+      try {
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        return userCredential.user;
+      } catch (error) {
+        console.error("Registration error:", error);
+        throw error;
+      }
+    };
     console.log('Registration data submitted:', formData);
     onLogin();
   };
