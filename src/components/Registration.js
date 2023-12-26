@@ -1,10 +1,9 @@
 // Registration.js
 import React, { useState } from 'react';
-import './Registration.css'; // Import the CSS file
 
 const Registration = ({ onLogin }) => {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
     userType: 'job_hunter',
   });
@@ -28,22 +27,22 @@ const Registration = ({ onLogin }) => {
       <h2>Registration</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
+            id="email"
+            name="email"
+            placeholder="Password"
+            value={formData.email}
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
             name="password"
+            placeholder="Password"
             value={formData.password}
             onChange={handleChange}
             required
@@ -51,32 +50,30 @@ const Registration = ({ onLogin }) => {
         </div>
         <div className="form-group">
           <label>User Type:</label>
-          <div>
+          <div className='form-group'>
+            <input
+              type="radio"
+              name="userType"
+              value="job_hunter"
+              checked={formData.userType === 'job_hunter'}
+              onChange={handleChange}
+            />
             <label>
-              <input
-                type="radio"
-                name="userType"
-                value="job_hunter"
-                checked={formData.userType === 'job_hunter'}
-                onChange={handleChange}
-              />
               Job Hunter
             </label>
-          </div>
-          <div>
+            <input
+              type="radio"
+              name="userType"
+              value="recruiter"
+              checked={formData.userType === 'recruiter'}
+              onChange={handleChange}
+            />
             <label>
-              <input
-                type="radio"
-                name="userType"
-                value="recruiter"
-                checked={formData.userType === 'recruiter'}
-                onChange={handleChange}
-              />
               Recruiter
             </label>
           </div>
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" className='apply-button'>Register</button>
       </form>
     </div>
   );

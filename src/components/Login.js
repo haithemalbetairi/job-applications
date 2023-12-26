@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 const Login = ({ onLogin, onRegister }) => {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   });
 
@@ -27,32 +27,32 @@ const Login = ({ onLogin, onRegister }) => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
+            id="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
             name="password"
+            placeholder="Password"
             value={formData.password}
             onChange={handleChange}
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button className="apply-button" type="submit">Login</button>
       </form>
       <p>
         Don't have an account?{' '}
-        <button type="button" onClick={onRegister}>
+        <button type="button" className="apply-button" onClick={onRegister}>
           Register
         </button>
       </p>
