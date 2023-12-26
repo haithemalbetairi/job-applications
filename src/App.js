@@ -11,7 +11,7 @@ const App = () => {
     <>
       <Header />
       <Navbar />
-      <Content isLoggedIn={useState(false)} isRegistering= {useState(false)}/>
+      <Content />
       <Footer />
     </>
   );
