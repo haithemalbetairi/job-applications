@@ -30,13 +30,12 @@ exports.submitJobApplication = functions.https.onRequest(async (req, res) => {
     }
 
     // Extract data from the request
-    const { job, email, name } = req.body.data;
+    const { job, email} = req.body.data;
 
     // Add a new document with a generated ID in Firestore
     const applicationRef = await db.collection('job-application').add({
-      job: job,
-      email: email,
-      name: name,
+      job: admin.firestore().collection('job-listings').doc({job}),
+      user: admin.firestore().collection('user').doc({email}),
     });
 
     // Send response

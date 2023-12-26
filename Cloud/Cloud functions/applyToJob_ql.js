@@ -26,7 +26,7 @@ const schema = buildSchema(`
     message: String
   }
   type Mutation {
-    submitJobApplication(job: String, email: String, name: String): JobApplicationResponse
+    submitJobApplication(job: String, email: String): JobApplicationResponse
   }
   type JobApplicationResponse {
     success: Boolean
@@ -37,12 +37,11 @@ const schema = buildSchema(`
 
 const root = {
   message: () => 'Hello World!',
-  submitJobApplication: async ({ job, email, name }) => {
+  submitJobApplication: async ({ job, email }) => {
     try {
       const applicationRef = await admin.firestore().collection('job-application').add({
-        job,
-        email,
-        name,
+        job: admin.firestore().collection('job-listings').doc({job}),
+        user: admin.firestore().collection('user').doc({email}),
       });
 
       return { success: true, id: applicationRef.id, message: "Application submitted successfully" };
