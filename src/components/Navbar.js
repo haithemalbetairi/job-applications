@@ -10,10 +10,10 @@ const Navbar = () => {
   };
   return (
     <div className="navbar">
-      <div className="job-form">
+      <div className='job-form'>
         <button type="button">Home</button>
         <button type="button" onClick={handleToggleClick}>
-          Posting a Job
+          Post a Job
         </button>
         {isClicked ? <JobForm state={handleToggleClick} /> : null}
       </div>
