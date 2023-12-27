@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: job-app
   version: 1.0.0
-host: job-app-container
+host: job-app.apigateway.job-posting-409011.cloud.goog
 paths:
   /jobs:
     post:
