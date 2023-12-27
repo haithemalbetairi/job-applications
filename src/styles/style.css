@@ -10,6 +10,10 @@ li {
   padding: 0;
 }
 
+ul {
+  list-style: none;
+}
+
 body {
   font-family: 'Segoe UI', 'Arial', sans-serif;
   background-color: #fff; /* White background */
@@ -129,12 +133,12 @@ button {
   width: 100px; /* Custom width */
   /* Additional styles like padding, border, etc., to achieve the desired appearance */
 }
-.job-form button {
+.navbar button {
   background-color: #fff;
   color: #333;
   margin: 3px;
 }
-.job-form input {
+.navbar input {
   background-color: #fff;
   color: #333;
   display: inline;
@@ -147,7 +151,21 @@ button {
   height: 20px; /* Custom height */
   width: 150px;
 }
-.job-form button:hover {
+.navbar button:hover {
   background-color: #666;
   color: #ddd;
+}
+
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
