@@ -32,7 +32,7 @@ type UserData {
 }
 
 type Query {
-  jobPostings: [Job]
+  jobs: [Job]
   jobApplications(jobId: ID): JobData
   jobsApplied(email: String): User
 }
