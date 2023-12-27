@@ -1,6 +1,5 @@
-swagger: 2.0
+swagger: '2.0'
 info:
-  APP_ID: job-app
   title: Job Posting API
   version: 1.0.0
 
@@ -8,116 +7,237 @@ paths:
   /jobs:
     post:
       summary: Create a job posting
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              id: "67890"
-              data:
-                title: "Software Engineer"
-                description: "Exciting opportunity for..."
-                requirements:
-                  - "B.S. degree in computer science"
-                  - "Experience with Java"
-                deadline: "2023-12-31"
-                recruiter: "alan.turing@example.com"
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                data:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    description:
+                      type: string
+                    requirements:
+                      type: array
+                      items:
+                        type: string
+                    deadline:
+                      type: string
+                    recruiter:
+                      type: string
+              example:
+                id: '67890'
+                data:
+                  title: Software Engineer
+                  description: Exciting opportunity for...
+                  requirements:
+                    - B.S. degree in computer science
+                    - Experience with Java
+                  deadline: '2023-12-31'
+                  recruiter: alan.turing@example.com
       responses:
         '200':
           description: Successful response
-          content:
-            application/json:
-              example:
-                message: "Posting created successfully."
-                id: "67890"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              id:
+                type: string
+          example:
+            message: Posting created successfully.
+            id: '67890'
 
     get:
       summary: Get job listings
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
       responses:
         '200':
           description: Successful response
-          content:
-            application/json:
-              example:
-                message: "Listings retrieved successfully."
-                data:
-                  - title: "Software Engineer"
-                    description: "Exciting..."
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    description:
+                      type: string
                     requirements:
-                      - "B.S. degree in computer science"
-                      - "Experience with Java"
-                    deadline: "2023-12-25"
-                    recruiter: "alan.turing@example.com"
-                  - _comment: "Additional job listings"
+                      type: array
+                      items:
+                        type: string
+                    deadline:
+                      type: string
+                    recruiter:
+                      type: string
+                  example:
+                    title: Software Engineer
+                    description: Exciting...
+                    requirements:
+                      - B.S. degree in computer science
+                      - Experience with Java
+                    deadline: '2023-12-25'
+                    recruiter: alan.turing@example.com
+                  - _comment: Additional job listings
 
   /jobs/applications:
     post:
       summary: Submit a job application
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              data:
-                job_id: "67890"
-                user_id: "john.doe@example.com"
-                resume: "base64_encoded_resume_content"
-                cover_letter: "A brief cover letter for..."
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    job_id:
+                      type: string
+                    user_id:
+                      type: string
+                    resume:
+                      type: string
+                    cover_letter:
+                      type: string
+              example:
+                data:
+                  job_id: '67890'
+                  user_id: john.doe@example.com
+                  resume: base64_encoded_resume_content
+                  cover_letter: A brief cover letter for...
       responses:
         '200':
           description: Successful response
-          content:
-            application/json:
-              example:
-                message: "Application submitted successfully."
-                application_id: "54321"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              application_id:
+                type: string
+          example:
+            message: Application submitted successfully.
+            application_id: '54321'
 
   /users:
     post:
       summary: Create a user account
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              data:
-                email: "john.doe@example.com"
-                password: "hashed_password"
-                user_type: "job_hunter"
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    user_type:
+                      type: string
+              example:
+                data:
+                  email: john.doe@example.com
+                  password: hashed_password
+                  user_type: job_hunter
       responses:
         '200':
           description: Successful response
-          content:
-            application/json:
-              example:
-                message: "User account created successfully."
-                email: "john.doe@example.com"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              email:
+                type: string
+          example:
+            message: User account created successfully.
+            email: john.doe@example.com
 
     put:
       summary: Update user profile
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
         - in: path
           name: user_id
           required: true
-          schema:
-            type: string
+          type: string
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              email: "john.doe@example.com"
-              data:
-                full_name: "John Doe"
-                skills:
-                  - "Python"
-                  - "Java"
-                  - "Web Development"
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                data:
+                  type: object
+                  properties:
+                    full_name:
+                      type: string
+                    skills:
+                      type: array
+                      items:
+                        type: string
+              example:
+                email: john.doe@example.com
+                data:
+                  full_name: John Doe
+                  skills:
+                    - Python
+                    - Java
+                    - Web Development
       responses:
         '200':
           description: Successful response
-          content:
-            application/json:
-              example:
-                message: "User profile updated successfully."
-                email: "john.doe@example.com"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              email:
+                type: string
+          example:
+            message: User profile updated successfully.
+            email: john.doe@example.com

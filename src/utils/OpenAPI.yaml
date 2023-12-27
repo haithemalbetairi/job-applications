@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  APP_ID: job
+  title: Job Posting API
+  version: 1.0.0
+
+paths:
+  /jobs:
+    post:
+      summary: Create a job posting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              id: "67890"
+              data:
+                title: "Software Engineer"
+                description: "Exciting opportunity for..."
+                requirements:
+                  - "B.S. degree in computer science"
+                  - "Experience with Java"
+                deadline: "2023-12-31"
+                recruiter: "alan.turing@example.com"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Posting created successfully."
+                id: "67890"
+
+    get:
+      summary: Get job listings
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Listings retrieved successfully."
+                data:
+                  - title: "Software Engineer"
+                    description: "Exciting..."
+                    requirements:
+                      - "B.S. degree in computer science"
+                      - "Experience with Java"
+                    deadline: "2023-12-25"
+                    recruiter: "alan.turing@example.com"
+                  - _comment: "Additional job listings"
+
+  /jobs/applications:
+    post:
+      summary: Submit a job application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              data:
+                job_id: "67890"
+                user_id: "john.doe@example.com"
+                resume: "base64_encoded_resume_content"
+                cover_letter: "A brief cover letter for..."
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Application submitted successfully."
+                application_id: "54321"
+
+  /users:
+    post:
+      summary: Create a user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              data:
+                email: "john.doe@example.com"
+                password: "hashed_password"
+                user_type: "job_hunter"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "User account created successfully."
+                email: "john.doe@example.com"
+
+    put:
+      summary: Update user profile
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: "john.doe@example.com"
+              data:
+                full_name: "John Doe"
+                skills:
+                  - "Python"
+                  - "Java"
+                  - "Web Development"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "User profile updated successfully."
+                email: "john.doe@example.com"
