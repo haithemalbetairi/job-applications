@@ -1,5 +1,6 @@
 swagger: 2.0
 info:
+  APP_ID: job-app
   title: Job Posting API
   version: 1.0.0
 
