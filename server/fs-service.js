@@ -3,13 +3,7 @@ const firestore = require('firebase/firestore');
 
 // Web app's Firebase configuration
 const firebaseApp = app.initializeApp({
-  apiKey: "AIzaSyA0nP2NYmqe-3ZCurR74QL_JgWklFPOIVw",
-  authDomain: "job-posting-409011.firebaseapp.com",
-  projectId: "job-posting-409011",
-  storageBucket: "job-posting-409011.appspot.com",
-  messagingSenderId: "848172609833",
-  appId: "1:848172609833:web:d50da1a1cd7e97346c8738",
-  measurementId: "G-G7YJ0X7PRN"
+  // your firebase API key
 });
 
 // Fetch the Firestore
